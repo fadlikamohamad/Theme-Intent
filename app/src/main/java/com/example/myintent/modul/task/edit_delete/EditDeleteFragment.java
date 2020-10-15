@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import com.example.myintent.R;
 import com.example.myintent.base.BaseFragment;
 import com.example.myintent.modul.profile.ProfileActivity;
+import com.example.myintent.modul.task.input.InputActivity;
+import com.example.myintent.modul.task.list.ListActivity;
 
 /**
  * Created by fahrul on 13/03/19.
@@ -23,6 +25,8 @@ public class EditDeleteFragment extends BaseFragment<EditDeleteActivity, EditDel
     EditText etEmail;
     EditText etPassword;
     Button btnLogin;
+    Button btnUpdate;
+    Button btnDelete;
 
     public EditDeleteFragment() {}
 
@@ -36,10 +40,24 @@ public class EditDeleteFragment extends BaseFragment<EditDeleteActivity, EditDel
         etEmail = fragmentView.findViewById(R.id.et_email);
         etPassword = fragmentView.findViewById(R.id.et_password);
         btnLogin = fragmentView.findViewById(R.id.bt_login);
+        btnUpdate = fragmentView.findViewById(R.id.buttonUpdate);
+        btnDelete = fragmentView.findViewById(R.id.buttonDelete);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setBtLoginClick();
+            }
+        });
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backToList();
+            }
+        });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backToList();
             }
         });
         setTitle("My Edit/Delete View");
@@ -51,6 +69,12 @@ public class EditDeleteFragment extends BaseFragment<EditDeleteActivity, EditDel
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
         mPresenter.performLogin(email,password);
+    }
+
+    public void backToList() {
+        Intent intent = new Intent(activity, ListActivity.class);
+        startActivity(intent);
+        activity.finish();
     }
 
     @Override

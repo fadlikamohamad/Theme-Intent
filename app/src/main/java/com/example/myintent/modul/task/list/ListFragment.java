@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 
 import com.example.myintent.R;
 import com.example.myintent.base.BaseFragment;
 import com.example.myintent.modul.profile.ProfileActivity;
+import com.example.myintent.modul.task.edit_delete.EditDeleteActivity;
+import com.example.myintent.modul.task.input.InputActivity;
 
 /**
  * Created by fahrul on 13/03/19.
@@ -23,6 +26,8 @@ public class ListFragment extends BaseFragment<ListActivity, ListContract.Presen
     EditText etEmail;
     EditText etPassword;
     Button btnLogin;
+    Button btnAdd;
+    ListView lvDetail;
 
     public ListFragment() {}
 
@@ -36,10 +41,24 @@ public class ListFragment extends BaseFragment<ListActivity, ListContract.Presen
         etEmail = fragmentView.findViewById(R.id.et_email);
         etPassword = fragmentView.findViewById(R.id.et_password);
         btnLogin = fragmentView.findViewById(R.id.bt_login);
+        lvDetail = fragmentView.findViewById(R.id.listView);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setBtLoginClick();
+            }
+        });
+        btnAdd = fragmentView.findViewById(R.id.buttonAdd);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToInput();
+            }
+        });
+        lvDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDetail();
             }
         });
         setTitle("My List View");
@@ -51,6 +70,18 @@ public class ListFragment extends BaseFragment<ListActivity, ListContract.Presen
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
         mPresenter.performLogin(email,password);
+    }
+
+    public void moveToInput() {
+        Intent intent = new Intent(activity, InputActivity.class);
+        startActivity(intent);
+        activity.finish();
+    }
+
+    public void showDetail() {
+        Intent intent = new Intent(activity, EditDeleteActivity.class);
+        startActivity(intent);
+        activity.finish();
     }
 
     @Override

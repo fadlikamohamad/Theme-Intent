@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import com.example.myintent.R;
 import com.example.myintent.base.BaseFragment;
 import com.example.myintent.modul.profile.ProfileActivity;
+import com.example.myintent.modul.task.list.ListActivity;
 
 /**
  * Created by fahrul on 13/03/19.
@@ -23,6 +24,7 @@ public class InputFragment extends BaseFragment<InputActivity, InputContract.Pre
     EditText etEmail;
     EditText etPassword;
     Button btnLogin;
+    Button btnAdd;
 
     public InputFragment() {}
 
@@ -36,10 +38,17 @@ public class InputFragment extends BaseFragment<InputActivity, InputContract.Pre
         etEmail = fragmentView.findViewById(R.id.et_email);
         etPassword = fragmentView.findViewById(R.id.et_password);
         btnLogin = fragmentView.findViewById(R.id.bt_login);
+        btnAdd = fragmentView.findViewById(R.id.buttonAdd);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setBtLoginClick();
+            }
+        });
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backToList();
             }
         });
         setTitle("My Input View");
@@ -51,6 +60,12 @@ public class InputFragment extends BaseFragment<InputActivity, InputContract.Pre
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
         mPresenter.performLogin(email,password);
+    }
+
+    public void backToList() {
+        Intent intent = new Intent(activity, ListActivity.class);
+        startActivity(intent);
+        activity.finish();
     }
 
     @Override
