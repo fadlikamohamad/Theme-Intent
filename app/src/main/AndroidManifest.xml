@@ -17,6 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".modul.profile.ProfileActivity"></activity>
+        <activity android:name=".modul.task.list.ListActivity"></activity>
+        <activity android:name=".modul.task.input.InputActivity"></activity>
+        <activity android:name=".modul.task.edit_delete.EditDeleteActivity"></activity>
     </application>
 
 </manifest>
